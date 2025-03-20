@@ -1,6 +1,9 @@
-import { render as baseRender, html } from "../../node_modules/lit-html.js";
+import {
+    render as baseRender,
+    html,
+} from "./../../node_modules/lit-html/lit-html.js";
 
-const rootEl = document.querySelector('main');
+const rootEl = document.querySelector("main");
 
 function render(template) {
     baseRender(template, rootEl);
