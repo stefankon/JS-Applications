@@ -1,6 +1,6 @@
 // login, logout, register
 import { post, get } from "./api.js";
-import { clearUserData, setUserData } from "../util/user.js";
+import { clearUserData, setUserData } from "../utils/user.js";
 
 export async function login(email, password) {
     const result = await post("/users/login", {

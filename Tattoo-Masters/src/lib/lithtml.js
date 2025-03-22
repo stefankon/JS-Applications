@@ -5,8 +5,9 @@ import {
 
 const rootEl = document.querySelector("main");
 
-function render(template) {
-    baseRender(template, rootEl);
+function render(template, elementToRender) {
+    const el = elementToRender || rootEl;
+    baseRender(template, el);
 }
 
 export { render, html };
