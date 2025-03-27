@@ -21,5 +21,5 @@ page("/create", createView);
 page("/dashboard", dashboardView);
 page("/dashboard/:id", detailsView);
 page("/edit/:id", editView);
-// Stat page.js
+// Stat page
 page();
