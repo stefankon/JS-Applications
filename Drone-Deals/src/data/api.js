@@ -1,8 +1,7 @@
-import { getUserData, clearUserData } from "../util.js";
-import { customAlert } from "../errorHandler.js";
+import { clearUserData, getUserData } from "../utils.js";
+import {notificationView} from '../errorHandler.js';
 
 const host = 'http://localhost:3030';
-
 
 async function request(method, url, data) {
     const options = {
@@ -42,7 +41,7 @@ async function request(method, url, data) {
         return result;
 
     } catch (err) {
-        customAlert(err.message);
+        notificationView(err.message);
         throw err;
     }
 }

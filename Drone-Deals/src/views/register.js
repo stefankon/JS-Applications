@@ -1,7 +1,7 @@
 import { html, render, page } from "../lib.js";
-import { createSubmitHandler, updateNav } from "../util.js";
-import { register } from "../data/user.js";
-import { customAlert } from "../errorHandler.js";
+import { createSubmitHandler } from "../utils.js";
+import { register } from "../data/authtent.js";
+import { notificationView } from "../errorHandler.js";
 
 const template = (onRegister) => html`<section id="register">
   <div class="form">
@@ -27,20 +27,21 @@ const template = (onRegister) => html`<section id="register">
 </section>`;
 
 export function registerView() {
-  render(template(createSubmitHandler(onRegister)));
+  const mainEl = document.getElementById("main-element");
+  render(template(createSubmitHandler(onRegister)),mainEl);
 }
 
 async function onRegister({ email, password, "re-password": repass }) {
   
     if (!email || !password) {
-        return customAlert('All fields are required!');
+        return notificationView('All fields are required!');
     }
     if (password != repass) {
-        return customAlert('Passwords don\'t match!');
+        return notificationView('Passwords don\'t match!');
     }
 
     await register(email, password);
 
-    updateNav();
+    // updateNav();
     page.redirect('/');
 }

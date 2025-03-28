@@ -1,9 +1,11 @@
 import { page } from "../lib.js";
-import { logout } from "../data/user.js";
-import { updateNav } from "../util.js";
+import { logout } from "../data/authtent.js";
+import { navigationView } from "./navigation.js";
+import { getUserData } from "../utils.js";
 
 export function logoutView() {
+    const userData = getUserData();
     logout();
-    updateNav();
+    navigationView(userData);
     page.redirect('/');
 }

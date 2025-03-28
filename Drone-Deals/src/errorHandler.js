@@ -1,7 +1,7 @@
 
 
 
-export function customAlert(message){
+export function notificationView(message){
     return alert(message);
 }
 
