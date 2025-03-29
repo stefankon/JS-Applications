@@ -5,7 +5,7 @@ const template = (userData) => html` <!-- Navigation -->
   <a id="logo" href="/"><img id="logo" src="./images/logo2.png" alt="img" /></a>
   <nav>
     <div>
-      <a href="#">Marketplace</a>
+      <a href="/dashboard">Marketplace</a>
     </div>
     ${userData
       ? html`
