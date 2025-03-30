@@ -11,7 +11,7 @@ const template = (userData) => html` <!-- Navigation -->
       ? html`
           <!-- Logged-in users -->
           <div class="user">
-            <a href="#">Sell</a>
+            <a href="/create">Sell</a>
             <a href="/logout">Logout</a>
           </div>
         `

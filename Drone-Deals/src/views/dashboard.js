@@ -22,7 +22,7 @@ const items = (drone) => html`
         <p class="condition">Condition: ${drone.condition}</p>
         <p class="weight">Weight: ${drone.weight}g</p>
       </div>
-      <a class="details-btn" href="/details">Details</a>
+      <a class="details-btn" href="/dashboard/${drone._id}">Details</a>
     </div>
   </section>`;
 
