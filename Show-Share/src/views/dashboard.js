@@ -1,23 +1,30 @@
 import { html, render } from "../lib.js";
 import { navigationView } from "./navigation.js";
 import { getUserData } from "../utils.js";
-import { getAllShows } from "../data/dataColector.js";
+import { getAllitems } from "../data/dataColector.js";
+import { mainPath as mainEl } from "../utils.js";
 
-const template = (allItems) => html` ${allItems?.length
-  ? html `<!-- Dashboard page -->
-  <h2>Users Recommendations</h2>
-  <section id="shows">
-    <!-- Display a div with information about every post (if any)-->
-    ${allItems.map(items)}
-  </section>`
-  : html `<!-- Display an h2 if there are no posts -->
-  <h2 id="no-show">No shows Added.</h2>`}`;
 
-const items = (show) => html`<!-- Display a div with information about every post (if any)-->
+const template = (allItems) => html`<!-- Dashboard page -->
+<h2>Users Recommendations</h2>
+<section id="shows">
+  ${allItems?.length
+    ? html`${allItems.map(item)}`
+    : null
+  }
+</section>
+${allItems?.length
+    ? null
+    : html`<!-- Display an h2 if there are no posts -->
+<h2 id="no-show">No shows Added.</h2>`
+  }
+`;
+
+const item = (show) => html`<!-- Display a div with information about every post (if any)-->
   <div class="show">
     <img src="${show.imageUrl}" alt="example1" />
     <div class="show-info">
-      <h3 class="${show.title}">Vikings</h3>
+      <h3 class="title">${show.title}</h3>
       <p class="genre">Genre: ${show.genre}</p>
       <p class="country-of-origin">Country of Origin: ${show.country}</p>
       <a class="details-btn" href="/dashboard/${show._id}">Details</a>
@@ -26,8 +33,8 @@ const items = (show) => html`<!-- Display a div with information about every pos
 
 export async function dashboardView() {
   const userData = getUserData();
-  const mainEl = document.querySelector("main");
-  const allItems = await getAllShows();
+  // const mainEl = document.querySelector("main");
+  const allItems = await getAllitems();
 
   navigationView(userData);
   render(template(allItems), mainEl);

@@ -2,6 +2,7 @@ import { html, render, page } from "../lib.js";
 import { createSubmitHandler } from "../utils.js";
 import { register } from "../data/authtent.js";
 import { notificationView } from "../errorHandler.js";
+import { mainPath as mainEl } from "../utils.js";
 
 const template = (onRegister) => html` <!-- Register Page (Only for Guest users) -->
 <section id="register">
@@ -33,7 +34,7 @@ const template = (onRegister) => html` <!-- Register Page (Only for Guest users)
 </section>`;
 
 export function registerView() {
-  const mainEl = document.querySelector("main");
+  // const mainEl = document.querySelector("main");
   render(template(createSubmitHandler(onRegister)),mainEl);
 }
 

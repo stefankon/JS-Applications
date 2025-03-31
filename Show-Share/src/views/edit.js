@@ -1,112 +1,91 @@
 import { html, render, page } from "../lib.js";
 import { navigationView } from "./navigation.js";
 import { getUserData } from "../utils.js";
-import { editDroneDetails, getDroneDetails } from "../data/dataColector.js";
+import { editItemDetails, getItemDetails } from "../data/dataColector.js";
 import { notificationView } from "../errorHandler.js";
 import { createSubmitHandler } from "../utils.js";
+import { mainPath as mainEl } from "../utils.js";
 
-const template = (
-  data,
-  onEdit,
-  onDelete
-) => html`<!-- Edit Page (Only for logged-in users) -->
-  <section id="edit">
-    <div class="form form-item">
-      <h2>Edit Offer</h2>
-      <form class="edit-form" @submit=${onEdit}>
-        <input
-          type="text"
-          name="model"
-          id="model"
-          placeholder="Drone Model"
-          .value=${data.model}
-        />
-        <input
-          type="text"
-          name="imageUrl"
-          id="imageUrl"
-          placeholder="Image URL"
-          .value=${data.imageUrl}
-        />
-        <input
-          type="number"
-          name="price"
-          id="price"
-          placeholder="Price"
-          .value=${data.price}
-        />
-        <input
-          type="number"
-          name="weight"
-          id="weight"
-          placeholder="Weight"
-          .value=${data.weight}
-        />
-        <input
-          type="number"
-          name="phone"
-          id="phone"
-          placeholder="Phone Number for Contact"
-          .value=${data.phone}
-        />
-        <input
-          type="text"
-          name="condition"
-          id="condition"
-          placeholder="Condition"
-          .value=${data.condition}
-        />
-        <textarea
-          name="description"
-          id="description"
-          placeholder="Description"
-          .value=${data.description}
-        ></textarea>
-        <button type="submit">Edit</button>
-      </form>
-    </div>
-  </section>`;
+const template = (data, onEdit) => html` <!-- Edit Page (Only for logged-in users) -->
+<section id="edit">
+  <div class="form">
+    <h2>Edit Show</h2>
+    <form class="edit-form" @submit=${onEdit}>
+      <input
+        type="text"
+        name="title"
+        id="title"
+        placeholder="TV Show title"
+        .value=${data.title}
+      />
+      <input
+        type="text"
+        name="image-url"
+        id="image-url"
+        placeholder="Image URL"
+        .value=${data.imageUrl}
+      />
+      <input
+      type="text"
+      name="genre"
+      id="genre"
+      placeholder="Genre"
+      .value=${data.genre}
+    />
+    <input
+    type="text"
+    name="country"
+    id="country"
+    placeholder="Country"
+    .value=${data.country}
+  />
+      <textarea
+        id="details"
+        name="details"
+        placeholder="Details"
+        rows="2"
+        cols="10"
+        .value=${data.details}
+      ></textarea>
+      <button type="submit">Edit Show</button>
+    </form>
+  </div>
+</section>`;
 
 export async function editView(ctx) {
   const { id } = ctx.params;
   const userData = getUserData();
-  const mainEl = document.getElementById("main-element");
-  const data = await getDroneDetails(id);
+  // const mainEl = document.getElementById("main-element");
+  const data = await getItemDetails(id);
 
   navigationView(userData);
   render(template(data, createSubmitHandler(onEdit)), mainEl);
 
   async function onEdit({
-    model,
-    imageUrl,
-    price,
-    weight,
-    phone,
-    condition,
-    description,
+    title,
+    "image-url": imageUrl,
+    genre,
+    country,
+    details,
   }) {
-    debugger;
+    // debugger;
     if (
-      !model ||
+      !title ||
       !imageUrl ||
-      !price ||
-      !weight ||
-      !phone ||
-      !condition ||
-      !description
+      !genre ||
+      !country ||
+      !details
     ) {
       return notificationView("All fields are required!");
     }
-    const udtatedData = {
-      model,
+    const updatedData = {
+      title,
       imageUrl,
-      price,
-      weight,
-      phone,
-      condition,
-      description,
+      genre,
+      country,
+      details,
     };
-    await editDroneDetails(id, udtatedData);
+    await editItemDetails(id, updatedData);
     page.redirect(`/dashboard/${id}`);
   }
 }

@@ -1,6 +1,7 @@
 import { html, render } from "../lib.js";
 import { navigationView } from "./navigation.js";
 import { getUserData } from "../utils.js";
+import { mainPath as mainEl } from "../utils.js";
 
 const template = () => html` <!-- Home page -->
 
@@ -16,7 +17,7 @@ const template = () => html` <!-- Home page -->
 
 export function homepageView() {
   const userData = getUserData();
-  const mainEl = document.querySelector("main");
+  // const mainEl = document.querySelector("main");
 
   navigationView(userData);
   render(template(), mainEl);

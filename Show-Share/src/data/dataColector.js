@@ -1,32 +1,32 @@
 import { get, post, put, del } from "./api.js";
 
 const endpoints = {
-  allswows: "/data/shows?sortBy=_createdOn%20desc",
-  createDron: "/data/drones",
-  dorneById: "/data/drones/",
-  byName: (query) => `/data/drones?where=model%20LIKE%20%22${query}%22`,
+  allitems: "/data/shows?sortBy=_createdOn%20desc",
+  createItem: "/data/shows",
+  itemById: "/data/shows/",
+  byName: (query) => ``,
 };
 
 //All items
-export async function getAllShows() {
-    return get(endpoints.allswows);    
+export async function getAllitems() {
+    return get(endpoints.allitems);    
 }
 
-//Create Item
-export async function createDron(data) {
-    return post(endpoints.createDron, data);
+//Create Itemf
+export async function createItem(data) {
+    return post(endpoints.createItem, data);
 }
 
 //Select Item
-export async function getDroneDetails(id) {
-  return get(endpoints.dorneById + id)
+export async function getItemDetails(id) {
+  return get(endpoints.itemById + id)
 }
 //Delet Item
-export async function deleteDrone(id) {
-  return del(endpoints.dorneById + id)
+export async function deleteItem(id) {
+  return del(endpoints.itemById + id)
 }
 //Edit Item
-export async function editDroneDetails(id,udtatedData) {
-  debugger;
-  return put((endpoints.dorneById + id), udtatedData) 
+export async function editItemDetails(id,udtatedData) {
+  // debugger;
+  return put((endpoints.itemById + id), udtatedData) 
 }

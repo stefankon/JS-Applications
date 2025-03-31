@@ -2,6 +2,7 @@ import { html, render, page } from "../lib.js";
 import { login } from "../data/authtent.js";
 import { createSubmitHandler } from "../utils.js";
 import { notificationView } from "../errorHandler.js";
+import { mainPath as mainEl } from "../utils.js";
 
 const loginTemplate = (onLogin) => html` <!-- Login Page (Only for Guest users) -->
 <section id="login">
@@ -24,7 +25,7 @@ const loginTemplate = (onLogin) => html` <!-- Login Page (Only for Guest users) 
 </section>`;
 
 export function loginView() {
-  const mainEl = document.querySelector("main");
+  // const mainEl = document.querySelector("main");
   render(loginTemplate(createSubmitHandler(onLogin)), mainEl);
 
   async function onLogin({ email, password }, form) {

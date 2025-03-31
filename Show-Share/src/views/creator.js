@@ -1,87 +1,88 @@
 import { html, render, page } from "../lib.js";
 import { navigationView } from "./navigation.js";
 import { getUserData } from "../utils.js";
-import { createDron } from "../data/dataColector.js";
+import { createItem } from "../data/dataColector.js";
 import { notificationView } from "../errorHandler.js";
 import { createSubmitHandler } from "../utils.js";
+import { mainPath as mainEl } from "../utils.js";
 
 const template = (
   onCreate
 ) => html`<!-- Create Page (Only for logged-in users) -->
-  <section id="create">
-    <div class="form form-item">
-      <h2>Add Drone Offer</h2>
-      <form class="create-form" @submit=${onCreate}>
-        <input type="text" name="model" id="model" placeholder="Drone Model" />
-        <input
+        <section id="create">
+          <div class="form">
+            <h2>Add Show</h2>
+            <form class="create-form" @submit=${onCreate}>
+              <input
+              type="text"
+              name="title"
+              id="title"
+              placeholder="TV Show title"
+            />
+            <input
+              type="text"
+              name="image-url"
+              id="image-url"
+              placeholder="Image URL"
+            />
+            <input
+            type="text"
+            name="genre"
+            id="genre"
+            placeholder="Genre"
+          />
+          <input
           type="text"
-          name="imageUrl"
-          id="imageUrl"
-          placeholder="Image URL"
+          name="country"
+          id="country"
+          placeholder="Country"
         />
-        <input type="number" name="price" id="price" placeholder="Price" />
-        <input type="number" name="weight" id="weight" placeholder="Weight" />
-        <input
-          type="number"
-          name="phone"
-          id="phone"
-          placeholder="Phone Number for Contact"
-        />
-        <input
-          type="text"
-          name="condition"
-          id="condition"
-          placeholder="Condition"
-        />
-        <textarea
-          name="description"
-          id="description"
-          placeholder="Description"
-        ></textarea>
-        <button type="submit">Add</button>
-      </form>
-    </div>
-  </section>`;
+            <textarea
+              id="details"
+              name="details"
+              placeholder="Details"
+              rows="2"
+              cols="10"
+            ></textarea>
+              <button type="submit">Add Show</button>
+            </form>
+          </div>
+        </section>`;
 
 export async function createView() {
   const userData = getUserData();
-  const mainEl = document.getElementById("main-element");
+  // const mainEl = document.getElementById("main-element");
 
   navigationView(userData);
   render(template(createSubmitHandler(onCreate)), mainEl);
 }
 
 async function onCreate({
-  model,
-  imageUrl,
-  price,
-  weight,
-  phone,
-  condition,
-  description,
+  title,
+  "image-url":imageUrl,
+  genre,
+  country,
+  details,
 }) {
   if (
-    !model ||
+    !title ||
     !imageUrl ||
-    !price ||
-    !weight ||
-    !phone ||
-    !condition ||
-    !description
+    !genre ||
+    !country ||
+    !details
+
   ) {
     return notificationView("All fields are required!");
   }
-debugger;
 
-const data = {
-  model,
-  imageUrl,
-  price,
-  weight,
-  phone,
-  condition,
-  description,
-}
-  await createDron(data);
+
+  const data = {
+    title,
+    imageUrl,
+    genre,
+    country,
+    details,
+  }
+  await createItem(data);
   page.redirect("/dashboard");
 }

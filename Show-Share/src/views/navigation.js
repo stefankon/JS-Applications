@@ -1,18 +1,19 @@
 import { html, render, page } from "../lib.js";
-const headerEl = document.querySelector("header");
+import { headerPath as headerEl} from "../utils.js";
+// const headerEl = document.querySelector("header");
 // TODO replace with actual layout
-const template = (userData) => html` <a id="logo" href="#"
+const template = (userData) => html` <a id="logo" href="/"
     ><img id="logo-img" src="./images/show_logo.png" alt="logo" />
   </a>
   <nav>
     <div>
-      <a href="#">TV Shows</a>
+      <a href="/dashboard">TV Shows</a>
       <a href="#">Search</a>
     </div>
     ${userData
       ? html`<!-- Logged-in users -->
           <div class="user">
-            <a href="#">Add Show</a>
+            <a href="/create">Add Show</a>
             <a href="/logout">Logout</a>
           </div>`
       : html` <!-- Guest users -->
